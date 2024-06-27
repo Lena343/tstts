@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Форма регистрации</title>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("fname").value;
+            var surname = document.getElementById("lname").value;
+            var dateOfBirth = document.getElementById('dateOfBirth').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var password = document.getElementById('password').value;
+            var today = new Date().toISOString().split('T')[0];
+            var letterPattern = /^[А-Яа-яA-Za-z]+$/;
+            var spaceCheck = /\s/;
+            
+            if (!name.match(letterPattern)) {
+                alert("Имя должно содержать только буквы.");
+                return false;
+            }
+
+            if (!surname.match(letterPattern)) {
+                alert("Фамилия должна содержать только буквы.");
+                return false;
+            }
+
+            if (dateOfBirth > today) {
+                alert('Дата рождения не может быть больше сегодняшней даты');
+                return false;
+            }
+
+            if (!phoneNumber.match(/^\+7\d{10}$/)) {
+                alert('Некорректный номер телефона. Пожалуйста, введите номер в формате +7XXXXXXXXXX');
+                return false;
+            }
+
+            if (password === '') {
+                alert('Пожалуйста, введите пароль');
+                return false;
+            }
+
+            if (spaceCheck.test(password)) {
+                alert("Пароль не должен содержать пробелы.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div id="form">
+    <h2>Форма регистрации</h2>
+    <form onsubmit="return validateForm()">
+        <div>
+        <label>Имя:</label>
+        <input type="text" id="fname" required><br><br>
+        </div>
+
+        <div>
+        <label>Фамилия:</label>
+        <input type="text" id="lname" required><br><br>
+        </div>
+
+        <div>
+        <label>Отчество:</label>
+        <input type="text" id="mname"><br><br>
+        </div>
+
+        <div>
+        <label>Дата рождения:</label>
+        <input type="date" id="dateOfBirth" min="01-01-1924" required><br><br>
+        </div>
+
+        <div>
+        <label>Номер телефона:</label>
+        <input type="text" id="phoneNumber" required><br><br>
+        </div>
+
+        <div>
+        <label>Эл. почта:</label>
+        <input type="email" id="email"><br><br>
+        </div>
+
+        <div>
+        <label>Дата</label>
+        <input type="date" id="dateField" required><br><br>
+        </div>
+
+        <div>
+        <label>Время:</label>
+        <input type="time" id="timeField" required><br><br>
+        </div>
+
+        <div>
+        <label>Пароль:</label>
+        <input type="password" id="password" minlength="8" required><br><br>
+        </div>
+
+        <div class="cnopka">
+        <button type="submit" class="btn">Отправить</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
